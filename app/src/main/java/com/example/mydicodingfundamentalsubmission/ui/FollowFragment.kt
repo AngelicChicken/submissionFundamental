@@ -42,11 +42,6 @@ class FollowFragment : Fragment() {
                 setFollowersData(followers)
             }
 
-            val layoutManager = LinearLayoutManager(requireActivity())
-            binding.rvFollow.layoutManager = layoutManager
-            val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
-            binding.rvFollow.addItemDecoration(itemDecoration)
-
         } else {
             binding.sectionLabel.text = "Get Following $username"
         }
@@ -55,6 +50,11 @@ class FollowFragment : Fragment() {
         val adapter = UserAdapter()
         adapter.submitList(followers)
         binding.rvFollow.adapter = adapter
+
+        val layoutManager = LinearLayoutManager(requireActivity())
+        binding.rvFollow.layoutManager = layoutManager
+        val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
+        binding.rvFollow.addItemDecoration(itemDecoration)
     }
 
     companion object {

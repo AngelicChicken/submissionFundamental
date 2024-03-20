@@ -41,9 +41,9 @@ class DetailActivity : AppCompatActivity() {
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
         sectionsPagerAdapter.username = username ?: ""
         val viewPager : ViewPager2 = findViewById(R.id.view_pager)
-        viewPager.adapter = sectionsPagerAdapter
+        binding.viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
-        TabLayoutMediator(tabs, viewPager) {
+        TabLayoutMediator(binding.tabs, binding.viewPager) {
                 tab, position -> tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
