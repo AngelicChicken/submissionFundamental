@@ -1,6 +1,7 @@
 package com.example.mydicodingfundamentalsubmission.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -34,6 +35,11 @@ class DetailActivity : AppCompatActivity() {
             setDetailData(detail)
         }
 
+        detailViewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
+
+
         if (username != null) {
             detailViewModel.getUserDetail(username)
         }
@@ -51,7 +57,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setDetailData(detail: DetailUserResponse?) {
-        // Update UI with user detail data
         detail?.let {
             binding.tvUsername.text = it.login
             binding.tvNama.text = it.name
@@ -63,5 +68,9 @@ class DetailActivity : AppCompatActivity() {
                 .circleCrop()
                 .into(binding.profileImage)
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

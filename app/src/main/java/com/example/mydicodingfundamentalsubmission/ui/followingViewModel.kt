@@ -10,20 +10,20 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class followersViewModel : ViewModel() {
-    private val _followers = MutableLiveData<List<User?>>()
-    val followers : LiveData<List<User?>> = _followers
+class followingViewModel : ViewModel() {
+    private val _following = MutableLiveData<List<User?>>()
+    val following : LiveData<List<User?>> = _following
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
     companion object{
-        private const val TAG = "FollowersViewModel"
+        private const val TAG = "FollowingViewModel"
     }
 
-    fun findFollowers(input: String){
+    fun findFollowing(input: String){
         _isLoading.value = true
-        val client = ApiConfig.getApiService().getFollowers(input)
+        val client = ApiConfig.getApiService().getFollowing(input)
         client.enqueue(object : Callback<List<User>> {
             override fun onResponse(
                 call: Call<List<User>>,
@@ -31,13 +31,12 @@ class followersViewModel : ViewModel() {
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful){
-                    val followers: List<User>? = response.body()
-                    _followers.value = followers
+                    val following: List<User>? = response.body()
+                    _following.value = following
                 }
             }
 
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
-                _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })

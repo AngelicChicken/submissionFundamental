@@ -1,6 +1,7 @@
 package com.example.mydicodingfundamentalsubmission.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -18,12 +19,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        supportActionBar?.hide()
-
 
         val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
         mainViewModel.user.observe(this){user ->
             setUserData(user)
+        }
+
+        mainViewModel.isLoading.observe(this) {
+            showLoading(it)
         }
 
         val layoutManager = LinearLayoutManager(this)
@@ -49,5 +52,9 @@ class MainActivity : AppCompatActivity() {
         val adapter = UserAdapter()
         adapter.submitList(user)
         binding.rvUser.adapter = adapter
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
