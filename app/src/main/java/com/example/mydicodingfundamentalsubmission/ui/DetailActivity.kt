@@ -54,6 +54,10 @@ class DetailActivity : AppCompatActivity() {
         }.attach()
 
         supportActionBar?.elevation = 0f
+
+        binding.floatingActionButton.setOnClickListener{
+            addToFavorite()
+        }
     }
 
     private fun setDetailData(detail: DetailUserResponse?) {
@@ -73,4 +77,10 @@ class DetailActivity : AppCompatActivity() {
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
+
+    private fun addToFavorite(){
+//        activityMainBinding.btnCalculateVolume.visibility = View.GONE
+        binding.floatingActionButton.setImageDrawable(resources.getDrawable(R.drawable.baseline_favorite_24))
+    }
+
 }
