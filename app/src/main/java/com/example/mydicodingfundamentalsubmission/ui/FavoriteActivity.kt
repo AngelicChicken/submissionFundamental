@@ -5,11 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mydicodingfundamentalsubmission.databinding.ActivityFavoriteBinding
-import com.example.mydicodingsubmissionawal.ui.UserAdapter
 
 class FavoriteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFavoriteBinding
-    private lateinit var userAdapter: UserAdapter
+    private lateinit var favoriteUserAdapter: FavoriteUserAdapter
     private lateinit var viewModel: FavoriteAddUpdateViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,15 +16,16 @@ class FavoriteActivity : AppCompatActivity() {
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userAdapter = UserAdapter()
+        favoriteUserAdapter = FavoriteUserAdapter(emptyList()) // Initialize with empty list
         binding.rvFavorite.apply {
             layoutManager = LinearLayoutManager(this@FavoriteActivity)
-            adapter = userAdapter
+            adapter = favoriteUserAdapter
         }
 
         viewModel = ViewModelProvider(this).get(FavoriteAddUpdateViewModel::class.java)
-        viewModel.showAllFavorite().observe(this) { favoriteUsers ->
-            userAdapter.submitList(favoriteUsers)
+        viewModel.getAllFavorite().observe(this) { favoriteUsers ->
+            favoriteUserAdapter.userList = favoriteUsers // Update the list in the adapter
+            favoriteUserAdapter.notifyDataSetChanged() // Notify adapter about the data change
         }
     }
 }
