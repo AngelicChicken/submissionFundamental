@@ -25,6 +25,7 @@ class UserAdapter : ListAdapter<User, UserAdapter.MyViewHolder>(DIFF_CALLBACK) {
                 val context = binding.root.context
                 val intent = Intent(context, DetailActivity::class.java)
                 intent.putExtra("username", item.login)
+                intent.putExtra("avatarUrl", item.avatarUrl)
                 context.startActivity(intent)
 
             }

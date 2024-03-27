@@ -30,4 +30,8 @@ class FavoriteRepository(application: Application) {
     fun update(user: favoriteUser){
         executorService.execute { mFavoriteDao.update(user) }
     }
+
+    fun getFavoriteByUsername(user: String): favoriteUser? {
+        return mFavoriteDao.getFavoriteByUsername(user)
+    }
 }

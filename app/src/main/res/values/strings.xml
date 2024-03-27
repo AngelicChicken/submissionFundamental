@@ -11,6 +11,7 @@
     <string name="previous">Previous</string>
     <string name="content_tab_home">Welcome Home</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="favorite">Ke Halaman Favorite</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello">Hello blank fragment</string>

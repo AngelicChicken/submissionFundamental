@@ -1,4 +1,4 @@
-package com.example.mydicodingfundamentalsubmission.ui
+package com.example.mydicodingfundamentalsubmission.ui.follow
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -36,7 +36,8 @@ class FollowFragment : Fragment() {
             username = it.getString(ARG_USERNAME)
         }
         if (position == 1){
-            val followersViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(followersViewModel::class.java)
+            val followersViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+                followersViewModel::class.java)
             followersViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
                 if (isLoading) {
                     binding.progressBar.visibility = View.VISIBLE
@@ -50,7 +51,8 @@ class FollowFragment : Fragment() {
             }
 
         } else {
-            val followingViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(followingViewModel::class.java)
+            val followingViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+                followingViewModel::class.java)
             followingViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
                 if (isLoading) {
                     binding.progressBar.visibility = View.VISIBLE

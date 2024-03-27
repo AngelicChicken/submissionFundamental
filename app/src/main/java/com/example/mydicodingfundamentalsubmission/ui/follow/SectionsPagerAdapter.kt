@@ -1,4 +1,4 @@
-package com.example.mydicodingfundamentalsubmission.ui
+package com.example.mydicodingfundamentalsubmission.ui.follow
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

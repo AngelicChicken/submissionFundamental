@@ -1,5 +1,6 @@
 package com.example.mydicodingfundamentalsubmission.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
@@ -46,6 +47,10 @@ class MainActivity : AppCompatActivity() {
 
         switchTheme.setOnCheckedChangeListener{ _: CompoundButton?, isChecked : Boolean ->
             settingViewModel.saveThemeSetting(isChecked)
+        }
+
+        binding.button.setOnClickListener{
+            startActivity(Intent(this, FavoriteActivity::class.java))
         }
 
 

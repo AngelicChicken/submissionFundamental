@@ -1,4 +1,4 @@
-package com.example.mydicodingfundamentalsubmission.ui
+package com.example.mydicodingfundamentalsubmission.ui.follow
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,20 +10,20 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class followingViewModel : ViewModel() {
-    private val _following = MutableLiveData<List<User?>>()
-    val following : LiveData<List<User?>> = _following
+class followersViewModel : ViewModel() {
+    private val _followers = MutableLiveData<List<User?>>()
+    val followers : LiveData<List<User?>> = _followers
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
     companion object{
-        private const val TAG = "FollowingViewModel"
+        private const val TAG = "FollowersViewModel"
     }
 
-    fun findFollowing(input: String){
+    fun findFollowers(input: String){
         _isLoading.value = true
-        val client = ApiConfig.getApiService().getFollowing(input)
+        val client = ApiConfig.getApiService().getFollowers(input)
         client.enqueue(object : Callback<List<User>> {
             override fun onResponse(
                 call: Call<List<User>>,
@@ -31,12 +31,13 @@ class followingViewModel : ViewModel() {
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful){
-                    val following: List<User>? = response.body()
-                    _following.value = following
+                    val followers: List<User>? = response.body()
+                    _followers.value = followers
                 }
             }
 
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
+                _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
